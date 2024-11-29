@@ -37,7 +37,7 @@ def main():
     # trained_model.add_callback('on_train_epoch_end', on_train_epoch_end)
     # trained_model.add_callback('on_train_epoch_start', on_train_epoch_start)
 
-    for epoch in range(11, NUM_EPOCHS + 1): 
+    for epoch in range(6, NUM_EPOCHS + 1): 
         trained_model = YOLO(f'full_models/yolo11n_custom_trained_{epoch - 1}.pt')
         # results = trained_model.train(data='./dataset/data.yaml', epochs=NUM_EPOCHS, device='cpu')
         results = trained_model.train(data='./dataset/data.yaml', epochs=1, device=0)
@@ -49,4 +49,6 @@ def main():
 
 
 if __name__ == "__main__":
+    import torch
+    print(torch.version.cuda)
     main()
