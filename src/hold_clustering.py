@@ -54,13 +54,11 @@ def dominant_color(image, detection, k=2, plotting=False):
     kmeans.fit(pixels)
 
     dominant_colors = kmeans.cluster_centers_.astype(int)
-    # print(f'Dominant Colors: {dominant_colors}')
     rgb_dist = rgb_distance(dominant_colors[0], dominant_colors[1])
+    
     color_image = np.full((100, 100, 3), rgb_dist, dtype=np.uint8)
-    # print(f'RGB Distance: {rgb_dist}')
 
     labels = kmeans.predict(pixels)
-    # print(f'Labels: {labels}')
 
 
     new_pixels = dominant_colors[labels]
@@ -83,7 +81,7 @@ def dominant_color(image, detection, k=2, plotting=False):
     return rgb_dist
 
 def group_colours(colours):
-    colours = np.array([colour[0] for colour in colours])
+    colours = np.array(colours)
 
     dbscan = DBSCAN(eps=20, min_samples=2).fit(colours)
 
@@ -126,14 +124,12 @@ def draw_yolo_bounding_box(image, detection):
 
     return image
 
-def classify_holds(hold_colours, labels):
-    filename = './classified_images/test3.png'
+def classify_holds(labels, detections, image_file, classified_holds_folder):
     max_label = max(labels)
-    detections = load_yolo_detections('./classified_images/test3_detection_results.txt')
-    os.makedirs('./classified_images/classified_holds', exist_ok=True)
+    os.makedirs(classified_holds_folder, exist_ok=True)
 
     for i in range(0, max_label + 1):
-        image = cv2.imread(filename)
+        image = cv2.imread(image_file)
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
         for index, label in enumerate(labels):
@@ -144,16 +140,9 @@ def classify_holds(hold_colours, labels):
 
             image = draw_yolo_bounding_box(image, detection)
                 
-        plt.imshow(image)
-        plt.show()
-        plt.close()
         
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-        cv2.imwrite(f'./classified_images/classified_holds/test3_class{i}.png', image)
-        print(f'./classified_images/classified_holds/test3_class{i}.png')
-        # cv2.imshow('image', image)
-        # cv2.waitKey(0)
-        # break
+        cv2.imwrite(f'{classified_holds_folder}{image_file[:-4]}_class{i}.png', image)
 
 
 def load_yolo_detections(file_path):
@@ -177,35 +166,21 @@ def load_yolo_detections(file_path):
                 'height': height,
             })
     return detections
-        
-
-def sort_holds_by_colour(hold_colours, labels):
-    destination_dir = "./classified_images/0"
-
-    # Process each image and class
-    for label, hold_colour in zip(labels, hold_colours):
-        # Create the class folder if it doesn't exist
-        class_folder = os.path.join(destination_dir, str(label))
-        os.makedirs(class_folder, exist_ok=True)
-
-        shutil.copy(destination_dir + '/' + hold_colour[0], class_folder)
 
 
 if __name__ == "__main__":
+    image_file = './test4.png'
+    detection_file = './classified_images/detections.txt'
+    classified_holds_folder = './classified_images/classified_holds/'
+
     colours = []
-    detections = load_yolo_detections('./classified_images/test3_detection_results.txt')
-    id = 0
+    detections = load_yolo_detections(detection_file)
 
     for detection in detections:
-        detection['id'] = id
-        image = cv2.imread('./classified_images/test3.png')
-        # colour = dominant_color(image, detection, plotting=True)
+        image = cv2.imread(image_file)
         colour = dominant_color(image, detection)
-        colours.append((colour, id))
-        id += 1
+        colours.append(colour)
 
     labels = group_colours(colours)
-
-    classify_holds(colours, labels)
-    # sort_holds_by_colour(colours, labels)
+    classify_holds(labels, detections, image_file, classified_holds_folder)
 

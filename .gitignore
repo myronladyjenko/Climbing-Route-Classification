@@ -164,3 +164,4 @@ cython_debug/
 runs/
 dataset_copy/
 .DS_Store
+classified_images/
