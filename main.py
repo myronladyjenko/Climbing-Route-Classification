@@ -38,12 +38,12 @@ def main():
     # trained_model.add_callback('on_train_epoch_start', on_train_epoch_start)
 
     for epoch in range(11, NUM_EPOCHS + 1): 
-        trained_model = YOLO(f'yolo11n_custom_trained_{epoch - 1}.pt')
+        trained_model = YOLO(f'full_models/yolo11n_custom_trained_{epoch - 1}.pt')
         # results = trained_model.train(data='./dataset/data.yaml', epochs=NUM_EPOCHS, device='cpu')
-        results = trained_model.train(data='./dataset_copy/data.yaml', epochs=1, device='cpu', half=True, workers=8)
-        trained_model.save(f'yolo11n_custom_trained_{epoch}.pt')
+        results = trained_model.train(data='./dataset/data.yaml', epochs=1, device=0)
+        trained_model.save(f'full_models/yolo11n_custom_trained_{epoch}.pt')
 
-    trained_model = YOLO(f'yolo11n_custom_trained_{NUM_EPOCHS}.pt')
+    trained_model = YOLO(f'full_models/yolo11n_custom_trained_{NUM_EPOCHS}.pt')
     # results = trained_model.predict(source='test3.png', conf=0.90, save=True, save_dir='/Users/myronladyjenko/Desktop/Guelph_School/F24_Guelph/CIS_4780/bouldering-holds-detection/runs/detect/predict')
     print(results)
 
