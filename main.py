@@ -40,13 +40,16 @@ def main():
     for epoch in range(1, NUM_EPOCHS + 1): 
         trained_model = YOLO(f'yolo11n_custom_trained_{epoch - 1}.pt')
         # results = trained_model.train(data='./dataset/data.yaml', epochs=NUM_EPOCHS, device='cpu')
-        results = trained_model.train(data='./dataset/data.yaml', epochs=NUM_EPOCHS, device=0)
+        results = trained_model.train(data='./dataset/data.yaml', epochs=1, device=0)
         trained_model.save(f'yolo11n_custom_trained_{epoch}.pt')
 
     trained_model = YOLO(f'yolo11n_custom_trained_{NUM_EPOCHS}.pt')
-    results = trained_model.predict(source='test3.png', conf=0.90, save=True, save_dir='/Users/myronladyjenko/Desktop/Guelph_School/F24_Guelph/CIS_4780/bouldering-holds-detection/runs/detect/predict')
+    # results = trained_model.predict(source='test3.png', conf=0.90, save=True, save_dir='/Users/myronladyjenko/Desktop/Guelph_School/F24_Guelph/CIS_4780/bouldering-holds-detection/runs/detect/predict')
     print(results)
 
 
 if __name__ == "__main__":
+    # import torch
+    # print(torch.version.cuda)
+    # print(torch.cuda.is_available())
     main()
