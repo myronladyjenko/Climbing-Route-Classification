@@ -10,7 +10,11 @@ imgsz: 640
 save: true
 save_period: -1
 cache: false
+<<<<<<< Updated upstream
 device: cpu
+=======
+device: mps
+>>>>>>> Stashed changes
 workers: 8
 project: null
 name: train14
@@ -103,4 +107,8 @@ erasing: 0.4
 crop_fraction: 1.0
 cfg: null
 tracker: botsort.yaml
+<<<<<<< Updated upstream
 save_dir: C:\Users\ericb\Documents\bouldering-holds-detection\runs\detect\train14
+=======
+save_dir: /Users/ericbuys/Documents/School/CIS_4780/bouldering-holds-detection/runs/detect/train14
+>>>>>>> Stashed changes
