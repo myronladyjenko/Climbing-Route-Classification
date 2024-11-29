@@ -2,7 +2,11 @@ task: detect
 mode: train
 model: yolo11n_custom_trained_0.pt
 data: ./dataset/data.yaml
+<<<<<<< Updated upstream
 epochs: 1
+=======
+epochs: 10
+>>>>>>> Stashed changes
 time: null
 patience: 100
 batch: 16
@@ -10,7 +14,11 @@ imgsz: 640
 save: true
 save_period: -1
 cache: false
+<<<<<<< Updated upstream
 device: 0
+=======
+device: cpu
+>>>>>>> Stashed changes
 workers: 8
 project: null
 name: train16
@@ -103,4 +111,8 @@ erasing: 0.4
 crop_fraction: 1.0
 cfg: null
 tracker: botsort.yaml
+<<<<<<< Updated upstream
 save_dir: C:\Users\ericb\Documents\bouldering-holds-detection\runs\detect\train16
+=======
+save_dir: /Users/ericbuys/Documents/School/CIS_4780/bouldering-holds-detection/runs/detect/train16
+>>>>>>> Stashed changes
