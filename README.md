@@ -1,6 +1,6 @@
-# bouldering-holds-detection
+# Bouldering Route Classification
 
-Note: Commits done from a different person's computer. 
+**Note:** Commits done from a different person's computer. 
 
 ## Setup
 
