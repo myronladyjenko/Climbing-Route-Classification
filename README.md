@@ -1,5 +1,7 @@
 # bouldering-holds-detection
 
+Note: Commits done from a different person's computer. 
+
 ## Setup
 
 ```
