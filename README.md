@@ -1,6 +1,6 @@
 # Bouldering Route Classification
 
-**Note:** Commits done from a different person's computer due to it's GPU capabilities. Work was understood by both members involved.
+**Note:** Commits were done from a different person's computer due to it's GPU capabilities. Work was understood by both members involved.
 
 ## Setup
 
