@@ -17,6 +17,8 @@ deactivate
 
 ### Development
 
+Note: the dataset has not been uploaded due to the size restrictions.
+
 The code is located in the folder ```src/``` (from the root folder of the project).
 Once the development is finished, please run the following commands to save the environment:
 
